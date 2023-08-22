@@ -54,6 +54,18 @@ client.on(Events.InteractionCreate, async (interaction) =>
 	}
 });
 
+client.on('interactionCreate', async interaction => {
+    if (!interaction.isButton()) return;
+
+    if (interaction.customId === 'reponse1') {
+        console.log("1");
+    } else if (interaction.customId === 'reponse2') {
+        console.log("2");
+    } else if (interaction.customId === 'reponse3') {
+        console.log("3");
+    }
+});
+
 // When the client is ready, run this code (only once)
 // We use 'c' for the event parameter to keep it separate from the already defined 'client'
 client.once(Events.ClientReady, c => {
