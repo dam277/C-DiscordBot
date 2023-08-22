@@ -29,6 +29,6 @@
    |:------------------------------------------------------------------:|
    | <img height="200px" src="https://avatars.githubusercontent.com/u/60733960?v=4" /> |
    ## Other links
-   <a href="https://dam277.github.io/dam277/">My portfolio</a>
-   <a href="https://discord.com/developers/applications"> bot </a>
+   <a href="https://dam277.github.io/dam277/">My portfolio</a><br />
+   <a href="https://discord.com/developers/applications">bot</a>
 </div>
