@@ -1,0 +1,18 @@
+{
+  "name": "guidebot",
+  "version": "1.0.0",
+  "description": "A bot from the official guide",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "C-DiscordBot"
+  },
+  "author": "Damien",
+  "license": "ISC",
+  "dependencies": {
+    "discord.js": "^14.13.0"
+  }
+}
