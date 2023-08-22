@@ -28,7 +28,7 @@
    | <b> <a href="https://github.com/dam277">Damien Loup</a> </b>       |
    |:------------------------------------------------------------------:|
    | <img height="200px" src="https://avatars.githubusercontent.com/u/60733960?v=4" /> |
-   
    ## Other links
    <a href="https://dam277.github.io/dam277/">My portfolio</a>
+   <a href="https://discord.com/developers/applications"> bot </a>
 </div>
