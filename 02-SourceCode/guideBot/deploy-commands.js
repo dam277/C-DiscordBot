@@ -30,7 +30,7 @@ for (const folder of commandFolders) {
 const rest = new REST().setToken(token);
 
 console.log("---------------------------------------------------");
-console.log(Routes.applicationGuildCommands(clientId, guildId));
+console.log(Routes.applicationCommands(clientId));
 console.log("---------------------------------------------------");
 
 // and deploy your commands!
@@ -40,7 +40,7 @@ console.log("---------------------------------------------------");
 
 		// The put method is used to fully refresh all commands in the guild with the current set
 		const data = await rest.put(
-			Routes.applicationGuildCommands(clientId, guildId),
+			Routes.applicationCommands(clientId),
 			{ body: commands },
 		);
 

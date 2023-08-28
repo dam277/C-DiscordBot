@@ -1,5 +1,5 @@
 //import { Client, Events, GatewayIntentBits } from "discord.js"
-const { Client, Events, GatewayIntentBits, Collection } = require('discord.js');
+const { Client, Events, GatewayIntentBits, Collection, hyperlink } = require('discord.js');
 const { token } = require('./config.json');
 const fs = require('node:fs');
 const path = require('node:path');
@@ -26,8 +26,9 @@ for (const folder of commandFolders) {
 		}
 	}
 }
+
 client.on("messageCreate", async message => {
-    console.log(message);
+    // console.log(message);
     console.log(`Message sent by ${message.author.tag}: ${message.content}`);
 });
 
