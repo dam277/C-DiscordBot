@@ -1,2 +1,2 @@
-.env
-config.json
+**/*.env
+**/configs.json
