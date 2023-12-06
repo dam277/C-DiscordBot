@@ -3,7 +3,7 @@ import logging
 import os
 from dotenv import load_dotenv
 
-from src.bot.PyBot import PyBot
+from src.bots.PyBot import PyBot
 
 def main():
     logging.basicConfig(level=logging.INFO)
