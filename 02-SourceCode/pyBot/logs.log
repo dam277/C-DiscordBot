@@ -1,0 +1,4 @@
+2023-12-07 01:54:19 [WARNING] This message will get logged on to a file
+2023-12-07 01:54:19 [INFO] Initializing PyBot
+2023-12-07 01:54:19 [WARNING] PyNaCl is not installed, voice will NOT be supported
+2023-12-07 01:54:19 [INFO] logging in using static token
