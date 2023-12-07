@@ -2,3 +2,6 @@
 2023-12-07 01:54:19 [INFO] Initializing PyBot
 2023-12-07 01:54:19 [WARNING] PyNaCl is not installed, voice will NOT be supported
 2023-12-07 01:54:19 [INFO] logging in using static token
+2023-12-07 01:54:20 [INFO] Shard ID None has connected to Gateway (Session ID: 148dbb3bd819aeb3667a6090620395ef).
+2023-12-07 01:54:22 [INFO] Logged on as pyBot#6798
+2023-12-07 01:54:22 [INFO] Successfully synced 4 commands
