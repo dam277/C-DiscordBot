@@ -6,26 +6,40 @@ from colorama import Fore
 
 from .BotBase import BotBase
 
+from ..commands.help.Commands import Commands
+
 class PyBot(BotBase): 
     def __init__(self, configs): 
         super().__init__(configs)
 
     def setup(self):
         """ Setup the bot commands and events """
-        @self.bot_instance.event
-        async def on_message(message):
+
+        @self.bot_instance.command()
+        async def users(ctx: commands.context.Context):
+            # await ctx.send(ctx.command.name)
+            c = Commands(ctx)
+            await c.execute()
+            txt = await c.getText()
+            print(txt)
+            
+        @self.bot_instance.event()
+        async def on_message(message: discord.Message):
             """ Execute when a message is sended
             $param -> message : Message sended
             """
-            print(f"{Fore.WHITE} -> {message.author}: {message.content}")
-            
-            # Check if the author is the bot himself
-            if message.author == self.bot_instance.user:
-                return
-            
-            # Check the command to send the message
-            if message.content.startswith('$hello'):
-                await message.reply(f'Hello {message.author.display_name}')
+            if message.content.startswith(self.bot_instance.command_prefix):
+                await self.bot_instance.process_commands(message)
+            else:
+                print(f"{Fore.WHITE} -> {message.author}: {message.content}")
+                
+                # Check if the author is the bot himself
+                if message.author == self.bot_instance.user:
+                    return
+                
+                # Check the command to send the message
+                if message.content.startswith('$hello'):
+                    await message.reply(f'Hello {message.author.display_name}')
 
         @self.bot_instance.tree.command(guild=discord.Object(id=1024725027691712572), name="test", description="Test command")
         async def test_command(interaction: discord.Interaction):
@@ -76,4 +90,6 @@ class PyBot(BotBase):
         @self.bot_instance.tree.command(guild=discord.Object(id=1024725027691712572), name="account_creation_date", description="acc creation date")  # create a user command for the supplied guilds
         async def account_creation_date(interaction: discord.Interaction, member: discord.Member):  # user commands return the member
             await interaction.response.send_message(f"{member.name}'s account was created on {member.created_at}")
+
+
 
