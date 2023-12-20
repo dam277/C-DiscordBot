@@ -51,11 +51,3 @@ class Logger:
             case LogDefinitions.CRITICAL:
                 print(f"{Fore.RED}CRITICAL: {message} {Fore.RESET}")
                 logging.critical(message)
-                
-if __name__ == "__main__":
-    Logger.get_instance().log(definition=LogDefinitions.DEBUG, message="message")
-    Logger.get_instance().log(definition=LogDefinitions.SUCCESS, message="message")
-    Logger.get_instance().log(definition=LogDefinitions.INFO, message="message")
-    Logger.get_instance().log(definition=LogDefinitions.WARNING, message="message")
-    Logger.get_instance().log(definition=LogDefinitions.ERROR, message="message")
-    Logger.get_instance().log(definition=LogDefinitions.CRITICAL, message="message")

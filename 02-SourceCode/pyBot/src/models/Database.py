@@ -1,8 +1,7 @@
+from mysql.connector.cursor import MySQLCursor
 import mysql.connector as connector
 import os
 import dotenv
-
-import asyncio
 
 from ..utils.logger import Logger as lg
 
@@ -28,13 +27,13 @@ class Database:
             Database.instance = Database()
         return Database.instance
     
-    async def bind_exec(self, query, values) -> tuple:
+    async def bind_exec(self, query, values):
         """ Bind a query with values to avoid SQL injection 
         $param query: string -> SQL query to execute to the database
         $param values: dict -> Dictionnary of real values 
         Return self.cursor: MySqlCursor -> Request result """
         try:
-            self.cursor.execute(query, values)
+            self.cursor.execute(query, values) 
             return self.cursor, True
         except connector.Error as err:
             lg.Logger().get_instance().log(lg.LogDefinitions.ERROR, f"Exception while using database : {err}")

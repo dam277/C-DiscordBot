@@ -1,7 +1,8 @@
+from mysql.connector.cursor import MySQLCursor
 from .Database import Database
-import mysql.connector as connector
+from .Table import Table
 
-class Server:
+class Server(Table):
     id = None               # Id of the server
     guild_id = None         # Id of the guild
     name = None             # Name of the server
@@ -13,16 +14,19 @@ class Server:
         self.guild_id = guild_id
         self.name = name
 
+        super().__init__()
+
     @staticmethod
-    async def create_server(guild_id, name):
+    async def create_server(guild_id, name) -> str:
         """ Create a server into the database 
         $param guild_id: Guild -> Discord server id
-        $param name: string -> Discord server name"""
+        $param name: string -> Discord server name
+        Return message: str -> Message to send to the server"""
 
         # Get the query string
         fields = "(id_server, guildId, name)"
         params = "(%(id_server)s, %(guildId)s, %(name)s)"
-        query = f"INSERT INTO {Server.TABLE} {fields} VALUES {params}"
+        query = f"INSERT INTO {Server.TABLE} {fields} VALUES {params};"
 
         # Get the server and define if it already exists
         obj_server = await Server.get_server_by_guild_id(guild_id)
@@ -47,26 +51,55 @@ class Server:
 
         # Get the query string
         where = "guildId = %(guildId)s"
-        query = f"SELECT * FROM {Server.TABLE} WHERE {where}"
+        query = f"SELECT * FROM {Server.TABLE} WHERE {where};"
 
         # Get the result by executing query into the database
-        result = await Database.get_instance().bind_exec(query, {"guildId": guild_id})
-        return Server.format_object(result)
+        cursor_result = await Database.get_instance().bind_exec(query, {"guildId": guild_id})
+        return Server.format_object(cursor_result)
     
     @staticmethod
-    def format_object(result):
-        """ Format a database result into a object 
-        $param result: MySql object -> result of the query 
-        Return None | Server -> None for no data, Server for successfully getting data """
+    async def get_server_id_by_guild_id(guild_id):
+        # Get the query string
+        where = "guildId = %(guildId)s"
+        query = f"SELECT id_server FROM {Server.TABLE} WHERE {where};"
 
+        # Get the result by executing query into the database
+        cursor_result = await Database.get_instance().bind_exec(query, {"guildId": guild_id})
+        return cursor_result[0].fetchone()[0]
+
+    @staticmethod
+    def format_object(cursor_result: MySQLCursor):
+        """ Format a database result into a object 
+        $param cursor_result: MySQLCursor -> result of the query 
+        Return None | Server -> None for no data, Server for successfully getting data """
         # Getting datas from result
-        datas = result[0].fetchall()
+        row = Table.get_one_row(cursor_result[0])
 
         # Check if datas are filled
-        if len(datas) < 1:
+        if row is None or len(row) < 1:
             return None
         
         # Create a server object and return it
-        server = Server(id=datas[0][0], guild_id=datas[0][1], name=datas[0][2])
+        server = Server(id=row[0], guild_id=row[1], name=row[2])
         return server
+    
+    @staticmethod
+    def format_list_object(cursor_result: MySQLCursor) -> list:
+        """ Format a database result into a object 
+        $param cursor_result: MySQLCursor -> result of the query 
+        Return None | list[Server] -> None for no data, list of servers for successfully getting datas """
+        # Getting datas from result
+        rows = Table.get_all_rows(cursor_result[0])
+
+        # Check if datas are filled
+        if len(rows) < 1:
+            return None
+        
+        # List all the servers
+        servers = list
+        for row in rows:
+            # Create a server object and add it to the servers list
+            server = Server(id=row[0], guild_id=row[1], name=row[2])
+            servers.append(server)
+        return servers
     

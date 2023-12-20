@@ -1,6 +1,7 @@
 {
     "resources" : 
     {
-        "filesPath" : "src/resources/files"
+        "filesPath" : "src/resources/files",
+        "max_file_size" : 26214400
     }
 }

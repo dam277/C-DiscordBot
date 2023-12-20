@@ -2,6 +2,7 @@ import discord
 from discord.ext import commands
 
 from .bot_interactions import slash_commands
+from .bot_interactions import events
 from ..utils.logger import Logger as lg
 
 class PyBot:
@@ -20,6 +21,7 @@ class PyBot:
         self.setup_intents()
         self.setup_events()
         slash_commands.setup_slash_commands(self.bot_instance)
+        events.setup_events(self.bot_instance)
 
     def setup_intents(self):
         self.INTENTS.message_content = True
@@ -33,10 +35,24 @@ class PyBot:
             lg.Logger().get_instance().log(lg.LogDefinitions.INFO, f"Logged on as {self.bot_instance.user}")
             try:
                 # Get the commands to sync
-                synced = await self.bot_instance.tree.sync(guild=discord.Object(id=1024725027691712572))
+                synced = await self.bot_instance.tree.sync()
                 lg.Logger().get_instance().log(lg.LogDefinitions.SUCCESS, f"synced {len(synced)} commands")
             except Exception as e:
                 lg.Logger().get_instance().log(lg.LogDefinitions.ERROR, e)
+
+        @self.bot_instance.event
+        async def on_connect():
+            """ Execute when the bot is connected """
+            lg.Logger().get_instance().log(lg.LogDefinitions.INFO, f"Connected as {self.bot_instance.user}")
+
+        @self.bot_instance.event
+        async def on_shard_connect(shard_id):
+            print(shard_id)
+
+        @self.bot_instance.event
+        async def on_disconnect():
+            """ Execute when the bot is connected """
+            lg.Logger().get_instance().log(lg.LogDefinitions.WARNING, f"Disconnected as {self.bot_instance.user}")
 
     def run(self):
         """ Run the bot """

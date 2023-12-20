@@ -1,6 +1,3 @@
-import logging
-
-import src.models.Server as srv
 import os
 from dotenv import load_dotenv
 
