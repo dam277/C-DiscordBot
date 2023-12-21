@@ -1,5 +1,7 @@
 import discord
 from discord.ext import commands
+import os
+import asyncio
 
 from ..bot_commands.setup.Setup import Setup
 from ..bot_commands.files.AddFile import AddFile
@@ -73,3 +75,26 @@ def setup_slash_commands(bot_instance: commands.Bot):
         """ Get the file from the database and send it to the channel """
         command = GetFile(file_name)
         await command.execute(interaction)
+
+    @bot_instance.tree.command(name="play_song", description="Play a song")
+    async def play_song(ctx: discord.Interaction, voice_channel: discord.VoiceChannel, sound_file: discord.Attachment):
+        # Connect to the specified voice channel
+        vc = await voice_channel.connect()
+
+        file_path = f"temp_sound_{ctx.guild.id}.mp3"
+        await sound_file.save(file_path)
+
+        # # Play the sound file
+        vc.play(discord.FFmpegPCMAudio(source=file_path, executable="E:/Développement/05-ApplicationsDev/ffmpeg/bin/ffmpeg.exe"), after=lambda e: print('done', e))
+
+         # Wait for the song to finish playing
+        while vc.is_playing():
+            await asyncio.sleep(1)
+
+        os.remove(file_path)
+
+    @bot_instance.tree.command(name="disconnect_voice", description="Disconnect the bot from the voice channel")
+    async def disconnect_voice(ctx: discord.Interaction):
+        for x in bot_instance.voice_clients:
+            return await x.disconnect()
+        

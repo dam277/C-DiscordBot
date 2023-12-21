@@ -1,3 +1,12 @@
-2023-12-20 04:18:09 [INFO] Initializing PyBot
-2023-12-20 04:18:09 [WARNING] PyNaCl is not installed, voice will NOT be supported
-2023-12-20 04:18:09 [INFO] logging in using static token
+2023-12-20 05:44:21 [INFO] Initializing PyBot
+2023-12-20 05:44:21 [INFO] logging in using static token
+2023-12-20 05:44:22 [INFO] Shard ID None has connected to Gateway (Session ID: c0a003eacd02b78f0d2a9a8e5e15d0a3).
+2023-12-20 05:44:22 [INFO] Connected as pyBot#6798
+2023-12-20 05:44:24 [INFO] Logged on as pyBot#6798
+2023-12-20 05:44:25 [INFO] Successfully synced 9 commands
+2023-12-20 05:45:04 [INFO] Connecting to voice...
+2023-12-20 05:45:04 [INFO] Starting voice handshake... (connection attempt 1)
+2023-12-20 05:45:05 [INFO] Voice handshake complete. Endpoint found milan5209.discord.media
+2023-12-20 05:45:07 [INFO] ffmpeg process 22368 successfully terminated with return code of 0.
+2023-12-20 05:46:00 [INFO] Disconnecting from voice normally, close code 1000.
+2023-12-20 05:46:01 [INFO] The voice handshake is being terminated for Channel ID 1132713125775421500 (Guild ID 817075041501446154)
